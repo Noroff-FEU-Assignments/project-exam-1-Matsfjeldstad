@@ -81,7 +81,7 @@ header .logo {
 .bottom-section .inner {
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  align-items: center;
   gap: 40px;
   height: 100%;
 }
@@ -216,19 +216,17 @@ header .logo.active {
   }
 
   .bottom-section {
-    display: flex;
     background-color: #38a47a;
     height: 80px;
-    position: relative;
-    align-items: center;
-  }
-  .bottom-section {
     display: block;
   }
   .bottom-section .inner {
     display: flex;
     flex-direction: row;
     height: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
   }
   .bottom-section .header-nav {
     flex-direction: row;
