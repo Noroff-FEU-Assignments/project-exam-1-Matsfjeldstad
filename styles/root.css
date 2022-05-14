@@ -2,6 +2,13 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
 body {
   background-image: url(/img/kiwihug-zGZYQQVmXw0-unsplash.jpg);
   background-repeat: repeat;
@@ -78,6 +85,24 @@ header .logo {
   background-color: #4d4c4c;
 }
 
+.singel-crypto {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #4d4c4c;
+}
+.crypto-ticker {
+  font-weight: 700;
+}
+.crypto-24h-change {
+  font-weight: 700;
+}
+.positive {
+  color: #38a47a;
+}
+.negative {
+  color: #b23d52;
+}
 .bottom-section {
   position: relative;
   height: 0vh;
@@ -223,8 +248,7 @@ header .logo.active {
   }
 
   .top-ten-crypto {
-    width: 100%;
-    justify-content: flex-end;
+    width: fit-content;
   }
 
   .bottom-section {
