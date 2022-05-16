@@ -1,0 +1,82 @@
+main {
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 64px;
+  color: #4c4c4c;
+  margin: 0;
+}
+
+h1 span {
+  font-family: "Bebas Neue", sans-serif;
+  color: #38a47a;
+}
+
+.article-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 16px;
+}
+.article-info p {
+  font-size: 24px;
+  color: #6b6b6b;
+}
+
+.hero-section .inner {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr 100%;
+  gap: 16px;
+  padding-bottom: 80px;
+  border-bottom: 2px #6b6b6b solid;
+}
+
+.main-picture {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.main-picture img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.article-section .inner {
+  width: 100%;
+  max-width: 880px;
+}
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+article p {
+  line-height: 2;
+}
+.img-container {
+  margin: 80px 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+.img-container img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+@media screen and (min-width: 769px) {
+  .hero-section .inner {
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 100%;
+  }
+  h1 {
+    font-size: 72px;
+  }
+}
