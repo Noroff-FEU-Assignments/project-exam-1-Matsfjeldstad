@@ -21,7 +21,9 @@ const searchBtn = document.querySelector(".search-btn");
 
 searchInput.onkeyup = function getSearchValue(event) {
   if (this.value.trim().length > 0) {
-    searchBtn.href = `/news/search.html?search=${this.value.trim()}`;
+    searchBtn.href = `/news/search.html?search=${this.value
+      .toLowerCase()
+      .trim()}`;
   } else {
     searchBtn.href = `#`;
   }
