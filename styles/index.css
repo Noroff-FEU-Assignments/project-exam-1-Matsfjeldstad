@@ -217,6 +217,11 @@ h3 {
   color: #fff;
   font-weight: 700;
 }
+.how-to-crypto-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 .how-to-crypto-section .post-section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
