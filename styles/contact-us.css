@@ -35,6 +35,9 @@ h1 {
 .input-container input, .input-container textarea {
   padding: 8px;
 }
+.input-container input.error, .input-container textarea.error {
+  border: 4px solid #b23d52;
+}
 .formToast{
   color: #fff;
   padding: 0;

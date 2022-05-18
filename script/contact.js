@@ -1,29 +1,5 @@
 const contactForm = document.querySelector(".contact-form");
 const formToaster = document.querySelector(".formToast");
-function formSubmissionHandler(event) {
-  event.preventDefault();
-
-  const formElement = event.target,
-    { action, method } = formElement,
-    body = new FormData(formElement);
-  console.log(body);
-  fetch(action, {
-    method,
-    body,
-  })
-    .then((response) => response.json())
-    .then((response) => {
-      console.log(response.status);
-      // Determine if the submission is not valid
-      if (isFormSubmissionError(response)) {
-        // Handle the case when there are validation errors
-      }
-      // Handle the happy path
-    })
-    .catch((error) => {
-      // Handle the case when there's a problem with the request
-    });
-}
 
 async function formHandler(event) {
   event.preventDefault();
@@ -36,8 +12,9 @@ async function formHandler(event) {
       body,
     });
     const responseJson = await response.json();
-    const status = responseJson.status;
     console.log(responseJson);
+    const status = responseJson.status;
+
     formToaster.innerHTML = "";
     if (status === "validation_failed") {
       if (formToaster.classList.contains("success")) {
@@ -45,7 +22,18 @@ async function formHandler(event) {
       }
       formToaster.classList.add("error");
       formToaster.innerHTML = responseJson.message;
-      console.log(formToaster);
+      const formInputs = event.target.querySelectorAll("input");
+      responseJson.invalid_fields.forEach((error) => {
+        let errorId = error.error_id.split("-ve-").pop();
+        formInputs.forEach((input) => {
+          if (input.name === errorId) {
+            input.classList.add("error");
+            const inputContainer = input.parentElement;
+            input.parentElement.querySelector(".error-info-field").innerHTML =
+              error.message;
+          }
+        });
+      });
     } else if (status === "mail_sent") {
       if (formToaster.classList.contains("error")) {
         formToaster.classList.remove("error");

@@ -55,6 +55,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 .blog-card .img-container img {
   width: 60%;
@@ -67,6 +68,9 @@ h3 {
   gap: 16px;
 }
 
+.top-stories-section .img-container {
+  height: 100%;
+}
 .info-section {
   background-color: white;
   padding: 16px;
@@ -270,8 +274,7 @@ h3 {
     width: 100%;
   }
   .blog-card .img-container {
-    height: auto;
-    min-height: 160px;
+    height: 250px;
   }
   .blog-card.img-container img {
     object-position: center;
