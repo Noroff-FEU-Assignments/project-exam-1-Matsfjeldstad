@@ -20,7 +20,7 @@ h1 span {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 16px;
+  gap: 24px;
 }
 .article-info p {
   font-size: 24px;
@@ -29,9 +29,10 @@ h1 span {
 
 .hero-section .inner {
   display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr 100%;
-  gap: 16px;
+  grid-template-rows: 1fr 0.5fr;
+  gap: 24px;
+  width: 100%;
+  max-width: 1080px;
   padding-bottom: 80px;
   border-bottom: 2px #6b6b6b solid;
 }
@@ -39,16 +40,20 @@ h1 span {
 .main-picture {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
+  background-color: #1e1e1e;
+  padding: 24px;
+  height: 100%;
 }
 .main-picture img {
+  object-fit: cover;
   width: 100%;
-  max-width: 600px;
+  max-width: 350px;
 }
 
 .article-section .inner {
   width: 100%;
-  max-width: 880px;
+  max-width: 980px;
 }
 article {
   display: flex;
@@ -73,8 +78,10 @@ article p {
 
 @media screen and (min-width: 769px) {
   .hero-section .inner {
-    grid-template-columns: 40% 60%;
-    grid-template-rows: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.5fr 1fr;
+    width: 80%;
+    gap: 24px;
   }
   h1 {
     font-size: 72px;
