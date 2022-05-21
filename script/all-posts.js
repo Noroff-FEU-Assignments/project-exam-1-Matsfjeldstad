@@ -44,7 +44,11 @@ pageNumbers.innerHTML = "";
 
 (async function checkPostArrayLength() {
   try {
-      const 
     console.log(maxLengthApiUrl);
-  } catch {}
+    const response = await fetch(maxLengthApiUrl);
+    const responseJson = await response.json();
+    console.log(responseJson);
+  } catch {
+    console.log("fitte");
+  }
 })();
