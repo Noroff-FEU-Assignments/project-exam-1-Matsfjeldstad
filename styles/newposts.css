@@ -3,6 +3,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  padding-bottom: 40px;
 }
 .page-description-container .inner {
   display: flex;
@@ -236,9 +237,9 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 24px;
   background-color: #121212;
-  padding: 16px;
+  padding: 16px 32px;
   width: fit-content;
   border-radius: 5px;
 }

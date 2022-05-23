@@ -28,12 +28,10 @@ body {
 
 main {
   background-color: #f1f0f0;
-  mix-blend-mode: multiply;
 }
 
 header {
   background-color: #f1f0f0;
-  mix-blend-mode: multiply;
 }
 
 header .logo {
@@ -340,6 +338,25 @@ header .logo.active {
   line-height: 40px;
   width: 240px;
   padding: 0 8px;
+}
+
+/* loading animation */
+*.loading {
+  animation: loading 1.2s infinite;
+  background-color: #f5f5f5;
+  color: transparent;
+}
+
+@keyframes loading {
+  0% {
+    background-color: #f5f5f5;
+  }
+  50% {
+    background-color: #a8a8a8;
+  }
+  100% {
+    background-color: #f5f5f5;
+  }
 }
 
 @media screen and (min-width: 769px) {

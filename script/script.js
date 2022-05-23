@@ -23,11 +23,10 @@ searchInput.onkeyup = function getSearchValue(event) {
   if (this.value.trim().length > 0) {
     searchBtn.href = `/news/search.html?search=${this.value
       .toLowerCase()
-      .trim()}`;
+      .trim()}&page=${1}`;
   } else {
     searchBtn.href = `#`;
   }
-  console.log(searchBtn.href);
 };
 
 // top 10 crypto section, using nomics api to collect the data
