@@ -25,7 +25,7 @@ if (pageCount <= 1) {
   }`;
 }
 
-let searchApiUrl = `http://projectexam.local/wp-json/wp/v2/posts?page=${pageCount}&search="${searchParam}"/`;
+let searchApiUrl = `https://api.frinans.casa/wp-json/wp/v2/posts?page=${pageCount}&search="${searchParam}"/`;
 // adding some description about the page dispalying what the user have searched on
 const pageDescription = document.querySelector(".page-description");
 pageDescription.innerHTML = `Here are some results on ${searchParam.toUpperCase()} `;
@@ -145,7 +145,7 @@ async function searchParamFetch() {
 
     // checks number of post in results
     const maxResponse = await fetch(
-      `http://projectexam.local/wp-json/wp/v2/posts?per_page=50&search="${searchParam}`,
+      `https://api.frinans.casa/wp-json/wp/v2/posts?per_page=50&search="${searchParam}`,
     );
     const maxResponseJson = await maxResponse.json();
     console.log(Math.ceil(maxResponseJson.length / 10));

@@ -138,7 +138,7 @@
 
         <form
           class="contact-form"
-          action="http://projectexam.local/wp-json/contact-form-7/v1/contact-forms/21/feedback"
+          action="https://api.frinans.casa/wp-json/contact-form-7/v1/contact-forms/21/feedback"
           method="post"
         >
           <div class="formToast"></div>
@@ -155,7 +155,7 @@
           <div class="input-container">
             <label for="emailInput">E-mail</label>
             <input
-              type="email"
+              type="text"
               name="your-email"
               id="emailInput"
               placeholder="E-mail"
@@ -181,6 +181,7 @@
               rows="10"
               placeholder="Your message"
             ></textarea>
+            <p class="error-info-field"></p>
           </div>
           <button type="submit">submit</button>
         </form>

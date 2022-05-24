@@ -1,4 +1,4 @@
-const baseApiUrl = "//projectexam.local/wp-json/wp/v2/posts";
+const baseApiUrl = "https://api.frinans.casa/wp-json/wp/v2/posts";
 const highlightedNewsContainer = document.querySelector(
   ".highlighted-news-container",
 );
@@ -146,25 +146,27 @@ const getArticleSubinfo = (infoString) => {
 
 (async function bigPostSection() {
   try {
-    const biggerPost = document.querySelector(".bigger-post-banner");
     const response = await fetch(baseApiUrl + "?offset=5&per_page=1");
     const postResponse = await response.json();
+    const biggerPost = document.querySelector(".bigger-post-banner");
     const post = postResponse[0];
-
-    //change title of card
-    const cardTitle = biggerPost.querySelector("h2");
-    cardTitle.innerHTML = post.title.rendered;
-
-    // change info paragraph of card
-    const cardSubInfo = biggerPost.querySelector("p");
-    cardSubInfo.innerHTML = getArticleSubinfo(post.content.rendered);
-
-    //change the img of the card
-    const cardImg = biggerPost.querySelector("img");
-    cardImg.src = ImgChecker(post.x_featured_media_large);
-
-    // give card category class
-    biggerPost.classList.add(post.x_categories);
+    biggerPost.outerHTML = ` <div class="bigger-post-banner ${post.x_categories.replaceAll(
+      ",",
+      "",
+    )}">
+    <div class="bigger-post-banner-info">
+    <h2>
+      ${post.title.rendered}
+    </h2>
+    <p>
+      ${getArticleSubinfo(post.content.rendered)}
+    </p>
+    <a href="/news/article.html?id=${
+      post.id
+    }" class="bigger-post-CTA"> Read more</a>
+  </div>
+  <img src="${post.x_featured_media_large}" alt="" />
+  </div>`;
   } catch {}
 })();
 

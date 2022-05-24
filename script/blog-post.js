@@ -1,7 +1,7 @@
 const param = new URLSearchParams(document.location.search);
 const idParam = param.get("id");
 
-const apiURL = `http://projectexam.local/wp-json/wp/v2/posts/${idParam}`;
+const apiURL = `https://api.frinans.casa/wp-json/wp/v2/posts/${idParam}`;
 console.log(apiURL);
 
 // function to get first p from wp string
@@ -72,6 +72,7 @@ async function spesificPageFetch() {
     // changeing the h1 of the artile based on wordpress post
     const title = document.querySelector("h1");
     title.innerHTML = responseJson.title.rendered;
+    document.title = responseJson.title.rendered;
     // changeing the subinfo of the artile based on wordpress post
     const subInfo = document.querySelector(".sub-info");
     subInfo.innerHTML = getArticleSubinfo(responseJson.content.rendered);
@@ -89,10 +90,7 @@ async function spesificPageFetch() {
     const article = document.querySelector("article");
     article.innerHTML = deleteTopSection(responseJson.content.rendered);
     //
-    const articleImg = article.querySelector("figure img");
-    const articleImgSrc = articleImg.src;
 
-    console.log(articleImg);
     // Get the image and insert it inside the modal - use its "alt" text as a caption
     const modal = document.querySelector(".img-modal");
     const imgs = document.querySelectorAll("img");
@@ -109,10 +107,18 @@ async function spesificPageFetch() {
       };
     });
     // close modal when clicking close Btn
-    const closeBtn = modal.querySelector(".close");
-    closeBtn.onclick = function () {
+
+    modal.addEventListener("click", function (event) {
+      // If user either clicks X button OR clicks outside the modal window, then close modal by calling closeModal()
+      const isOutside = !event.target.closest(".modual-content-container");
+      if (isOutside) {
+        closeModal();
+      }
+    });
+
+    function closeModal() {
       modal.style.display = "none";
-    };
+    }
     const loading = document.querySelectorAll(".loading");
     console.log(loading);
     loading.forEach((element) => {

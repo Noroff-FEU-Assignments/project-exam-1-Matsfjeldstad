@@ -233,38 +233,24 @@ h4 {
 .pagination {
   margin-bottom: 96px;
 }
-.pagination .inner {
+.load-more-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 24px;
   background-color: #121212;
+  color: #f5f5f5;
   padding: 16px 32px;
   width: fit-content;
   border-radius: 5px;
+  transition: ease-in-out 0.4s;
 }
-.pagination .inner svg {
-  height: 32px;
-  fill: #fff;
+.load-more-btn:hover {
+  background-color: #38a47a;
 }
-.prev-button {
-  transform: rotate(180deg);
-}
-.page-numbers {
-  display: flex;
-  gap: 16px;
-  color: #fff;
-  align-items: baseline;
-  font-size: 24px;
-}
-.page-number {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 300;
-}
-.page-number.active {
-  font-weight: 700;
-  text-decoration: underline;
+.load-more-btn:disabled {
+  background-color: #e8e8e8;
+  color: #4d4c4c;
 }
 @media screen and (min-width: 769px) {
   .post {
