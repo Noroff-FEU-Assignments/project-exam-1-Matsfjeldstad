@@ -19,7 +19,7 @@ async function formHandler(event) {
     const status = responseJson.status;
 
     formToaster.innerHTML = "";
-    if (status === "validation_failed") {
+    if (status !== "mail_sent") {
       if (formToaster.classList.contains("success")) {
         formToaster.classList.remove("success");
       }

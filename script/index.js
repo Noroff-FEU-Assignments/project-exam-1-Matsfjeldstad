@@ -63,12 +63,13 @@ const getArticleSubinfo = (infoString) => {
   const topArticleResponse = await fetch(baseApiUrl + "?categories=12");
   const topArticleJson = await topArticleResponse.json();
 
-  topArticle.innerHTML = `<div>
-  <div class="product-cat">News</div>
-  <h1>${topArticleJson[0].title.rendered}</h1>
-</div>
+  topArticle.innerHTML = `
 <div class="img-container">
   <img src="${topArticleJson[0].x_featured_media_large}" alt="" />
+</div>
+<div class = "top-info">
+  <div class="product-cat">News</div>
+  <h1>${topArticleJson[0].title.rendered}</h1>
 </div>`;
   topArticle.href = `/news/article.html?id=${topArticleJson[0].id}`;
   //

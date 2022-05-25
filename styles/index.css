@@ -1,5 +1,6 @@
 main {
   background-color: #f1f0f0;
+  padding-bottom: 160px;
 }
 main .inner {
   display: flex;
@@ -26,11 +27,18 @@ h1 {
 }
 
 h3 {
-  font-family: "Noto Serif", serif;
+  font-family: "Bebas Neue", sans-serif;
   font-weight: 700;
   color: #38a47a;
   margin: 0;
-  font-size: 36px;
+  font-size: 48px;
+}
+.big-section {
+  text-decoration: none;
+}
+.top-info {
+  padding: 16px;
+  border-bottom: 2px solid #a6a6a6;
 }
 .big-section .img-container {
   width: 100%;
@@ -131,8 +139,8 @@ h3 {
   right: 0;
   top: 0;
   mix-blend-mode: soft-light;
-  filter: grayscale(100%);
-  opacity: 50%;
+  filter: grayscale(100%) contrast(150%);
+  opacity: 70%;
   z-index: -1;
 }
 .bigger-post-banner-info h2 {
@@ -167,6 +175,12 @@ h3 {
 }
 
 /* carusell-section */
+.news-carousel-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
 
 .carousel-inner {
   width: 100%;
@@ -211,7 +225,8 @@ h3 {
 }
 
 .current-option-text1 {
-  font-size: 24px;
+  font-size: 48px;
+  font-family: "Bebas Neue", sans-serif;
   font-weight: 700;
   color: #fff;
   text-decoration: none;
@@ -221,6 +236,7 @@ h3 {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 }
 .image {
   top: 0;
@@ -286,6 +302,13 @@ h3 {
   animation: previous-text 0.65s 0.085s;
 }
 
+.HTC-read-more {
+  color: #1e1e1e;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: right;
+}
+
 @media screen and (min-width: 769px) {
   .highlighted-news-container {
     display: grid;
@@ -293,7 +316,7 @@ h3 {
     gap: 24px;
   }
   h1 {
-    font-size: 48px;
+    font-size: 64px;
     width: 70%;
   }
   .top-stories-section {
@@ -340,16 +363,6 @@ h3 {
     justify-content: space-between;
     font-weight: 200;
     font-size: 14px;
-  }
-  .news-carousel-section {
-    position: relative;
-    overflow: hidden;
-  }
-  .news-carusel {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    overflow-x: scroll;
-    scroll-behavior: smooth;
   }
 
   .big-section .img-container {

@@ -21,7 +21,7 @@ h1 span {
   grid-template-columns: 100%;
   grid-template-rows: 1fr 100%;
   gap: 24px;
-  padding-bottom: 80px;
+  overflow: hidden;
 }
 
 .article-info {
@@ -43,7 +43,7 @@ h1 span {
 }
 .main-picture img {
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
 }
 
 .article-section .inner {
@@ -53,7 +53,7 @@ h1 span {
 article {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 40px;
 }
 article p {
   line-height: 2;
