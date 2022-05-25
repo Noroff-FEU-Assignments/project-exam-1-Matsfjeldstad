@@ -369,7 +369,7 @@ header .logo.active {
     width: 0;
     padding: 0;
   }
-  .search-box:hover > .search-text {
+  .search-box.search-open > .search-text {
     width: 240px;
     padding: 0 8px;
   }

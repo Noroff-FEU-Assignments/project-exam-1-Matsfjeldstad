@@ -1,6 +1,3 @@
-const param = new URLSearchParams(document.location.search);
-const idParam = param.get("id");
-
 // function to tell the time since an article was posted
 function timeSince(date) {
   const totime = new Date(date);
@@ -47,19 +44,11 @@ let pageCount = 1;
 const loadMoreBtn = document.querySelector(".load-more-btn");
 
 const baseApiUrl = `https://api.frinans.casa/wp-json/wp/v2/posts`;
-let postUrl = `${baseApiUrl}?categories=${idParam}`;
+let postUrl = `${baseApiUrl}?categories=13`;
 
-const categoryUrl = `https://api.frinans.casa/wp-json/wp/v2/categories/${idParam}`;
 const postSection = document.querySelector(".post-inner");
 async function catgoryFetch() {
   try {
-    //fetching on category info
-    const response = await fetch(categoryUrl);
-    const responseJson = await response.json();
-    const pageTitle = document.querySelector("h1");
-    pageTitle.innerHTML = `${responseJson.name} posts (${responseJson.count})`;
-    document.title = `${responseJson.name} posts`;
-    // fetching posts using idParam
     const postFetch = await fetch(postUrl);
     const postJson = await postFetch.json();
 
@@ -115,7 +104,7 @@ const loadingpost = `<a href="" class="post bullish">
 const sortByNewest = document.querySelector(".newsest-sort");
 sortByNewest.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=${idParam}&${"order=desc&orderby=date"}`;
+  postUrl = `${baseApiUrl}?categories=13&${"order=desc&orderby=date"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -123,7 +112,7 @@ sortByNewest.onclick = function orderBy() {
 const sortByOldest = document.querySelector(".oldest-sort");
 sortByOldest.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=${idParam}&${"order=asc&orderby=date"}`;
+  postUrl = `${baseApiUrl}?categories=13&${"order=asc&orderby=date"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -131,7 +120,7 @@ sortByOldest.onclick = function orderBy() {
 const sortByAz = document.querySelector(".aZ-sort");
 sortByAz.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=${idParam}&${"order=asc&orderby=title"}`;
+  postUrl = `${baseApiUrl}?categories=13&${"order=asc&orderby=title"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -140,7 +129,7 @@ const sortByZa = document.querySelector(".zA-sort");
 
 sortByZa.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=${idParam}&${"order=desc&orderby=title"}`;
+  postUrl = `${baseApiUrl}?categories=13&${"order=desc&orderby=title"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };

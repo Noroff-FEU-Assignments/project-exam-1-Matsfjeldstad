@@ -97,112 +97,6 @@ h3 {
   width: 100%;
 }
 
-.news-carusel {
-  display: flex;
-  gap: 20px;
-  overflow-x: scroll;
-}
-
-.news-carusel::-webkit-scrollbar {
-  display: none;
-}
-.news-carusel .blog-card {
-  min-width: 240px;
-  height: 300px;
-  padding: 16px;
-  background-position: center;
-  background-size: 90%;
-  background-repeat: no-repeat;
-  background-color: #050001;
-  justify-content: flex-end;
-  gap: 24px;
-  color: #fff;
-  position: relative;
-}
-
-.news-carusel .blog-card > * {
-  z-index: 2;
-}
-
-.news-carusel .blog-card::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #050001;
-  z-index: 1;
-  opacity: 0.5;
-}
-.button-container {
-  width: 100%;
-  display: flex;
-  gap: 16px;
-}
-.button-container.mobile {
-  justify-content: space-between;
-}
-.button-container.desktop {
-  display: none;
-}
-.next-button,
-.prev-button {
-  width: 48px;
-  height: 48px;
-  padding: 12px;
-  border: 4px solid #38a47a;
-  background-color: transparent;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: 100ms ease-in-out;
-  overflow: hidden;
-}
-
-.next-button svg,
-.prev-button svg {
-  width: fit-content;
-  fill: #38a47a;
-}
-
-.prev-button svg {
-  transform: rotate(180deg);
-}
-
-.prev-button.unactive,
-.next-button.unactive {
-  border: 4px solid #ababab;
-}
-.prev-button.unactive svg,
-.next-button.unactive svg {
-  fill: #ababab;
-}
-
-.news-carousel-section {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.new-post-info__slider-buttons {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-.new-post-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.new-post-info p {
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  margin: 0;
-}
 .bigger-post-banner {
   width: 100%;
   height: fit-content;
@@ -271,6 +165,127 @@ h3 {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 24px;
 }
+
+/* carusell-section */
+
+.carousel-inner {
+  width: 100%;
+}
+.carousel-wrapper {
+  gap: 16px;
+  width: auto;
+  height: auto;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  overflow: hidden;
+  background-color: #1e1e1e;
+  position: relative;
+  box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0px 6.7px 5.3px rgba(0, 0, 0, 0.028), 0px 12.5px 10px rgba(0, 0, 0, 0.035),
+    0px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    0px 41.8px 33.4px rgba(0, 0, 0, 0.05), 0px 100px 80px rgba(0, 0, 0, 0.07);
+}
+.carousel-wrapper::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+  background-color: black;
+}
+.current-option {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: space-around;
+  position: relative;
+  color: #fff;
+  z-index: 2;
+  max-width: 40%;
+}
+
+.current-option-text1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.image {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/img/bull.jpg);
+  background-color: #1e1e1e;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+}
+.anim-previous .image {
+  animation: next-image 0.65s 0.085s;
+}
+.carousel-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 32px;
+  position: relative;
+  filter: invert();
+  z-index: 3;
+}
+
+.previous-option {
+  height: 32px;
+  width: 32px;
+  background: url(/img/icons/chevron-right-solid-car.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  transform: rotate(180deg);
+}
+.next-option {
+  height: 32px;
+  width: 32px;
+  background: url(/img/icons/chevron-right-solid-car.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(0deg);
+  border: none;
+}
+.anim-next .image,
+.anim-prev .image {
+  animation: next-image 0.65s 0.085s;
+}
+.anim-next .current-option-text1 {
+  animation: next-text 0.65s 0.085s;
+}
+
+.anim-next .current-option-text2 {
+  animation: next-text 0.65s 0.085s;
+}
+.anim-prev .current-option-text1 {
+  animation: previous-text 0.65s 0.085s;
+}
+
+.anim-prev .current-option-text2 {
+  animation: previous-text 0.65s 0.085s;
+}
+
 @media screen and (min-width: 769px) {
   .highlighted-news-container {
     display: grid;
@@ -365,5 +380,101 @@ h3 {
   }
   .how-to-crypto-section .post-section {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  .current-option,
+  .current-option-text1 {
+    color: #38a47a;
+  }
+  .previous-option {
+    transform: rotate(-90deg);
+  }
+  .next-option {
+    transform: rotate(90deg);
+  }
+  .carousel-wrapper {
+    flex-direction: row;
+    background-color: #1e1e1e;
+  }
+  .carousel-button {
+    flex-direction: column;
+    width: fit-content;
+    filter: none;
+  }
+
+  .image {
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    top: auto;
+    left: auto;
+    width: 400px;
+    height: 240px;
+  }
+  .carousel-wrapper::after {
+    content: "";
+    position: relative;
+    height: 0;
+    width: 0;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+    background-color: black;
+  }
+}
+@keyframes next-image {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes prev-image {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes next-text {
+  0% {
+    transform: translate(0, 0px);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(0, -90px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0px);
+    opacity: 1;
+  }
+}
+@keyframes previous-text {
+  0% {
+    transform: translate(0, 0px);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(0, 90px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0px);
+    opacity: 1;
   }
 }

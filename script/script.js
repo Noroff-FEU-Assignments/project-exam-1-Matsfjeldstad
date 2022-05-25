@@ -20,12 +20,22 @@ const searchInput = document.querySelector(".search-text");
 const searchBtn = document.querySelector(".search-btn");
 
 searchInput.onkeyup = function getSearchValue(event) {
-  if (this.value.trim().length > 0) {
-    searchBtn.href = `/news/search.html?search=${this.value
-      .toLowerCase()
-      .trim()}&page=${1}`;
+  // if enter is pressed search is exectued
+  if (event.keyCode === 13) {
+    searchBtn.click();
+  }
+};
+
+searchBtn.onclick = function searchClick() {
+  if (!this.parentElement.classList.contains("search-open")) {
+    this.parentElement.classList.add("search-open");
   } else {
-    searchBtn.href = `#`;
+    if (searchInput.value.trim().length > 0) {
+      console.log(searchInput.value);
+      this.href = `/news/search.html?search=${searchInput.value
+        .toLowerCase()
+        .trim()}`;
+    }
   }
 };
 

@@ -10,12 +10,13 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles/normalize.css" />
-    <link rel="stylesheet" href="../styles/root.css" />
-    <link rel="stylesheet" href="../styles/newposts.css" />
-    <script src="/script/all-posts.js" defer></script>
-    <script src="/script/script.js" defer></script>
-    <title>All crypto News</title>
+    <link rel="stylesheet" href="./styles/normalize.css" />
+    <link rel="stylesheet" href="./styles/root.css" />
+    <link rel="stylesheet" href="./styles/carusell.css" />
+    <script src="./script/script.js" defer></script>
+    <script src="./script/carusell.js" defer></script>
+    <!-- <script src="./script/index.js" defer></script> -->
+    <title>Frinans - A New Norwegian Crypto Blog</title>
   </head>
   <body>
     <header>
@@ -98,58 +99,34 @@
       </div>
     </header>
     <main>
-      <div class="page-description-container">
-        <div class="inner">
-          <h1>New Posts</h1>
-          <p class="page-description">
-            Read some of our newest stories surounding the cryptosphere
-          </p>
-        </div>
-      </div>
-      <div class="category-filter-container">
-        <div class="inner">
-          <span>filter by Catgory</span>
-          <div class="button-container">
-            <a href="../news/category.html?id=14" class="filter-buttons btc">
-              <div class="button-name">Bitcoin</div>
-            </a>
-            <a href="../news/category.html?id=15" class="filter-buttons eth">
-              <div class="button-name">Etherum</div>
-            </a>
-            <a
-              href="../news/category.html?id=16"
-              class="filter-buttons alt-coin"
-            >
-              <div class="button-name">Alt-coin</div>
-            </a>
-            <a href="../news/category.html?id=3" class="filter-buttons people">
-              <div class="button-name">People</div>
-            </a>
-            <a href="../news/category.html?id=6" class="filter-buttons bullish">
-              <div class="button-name">Bullish</div>
-            </a>
-            <a href="../news/category.html?id=5" class="filter-buttons bearish">
-              <div class="button-name">Bearish</div>
-            </a>
+      <div class="carusell-section">
+        <div class="carousel-inner inner">
+          <div class="carousel-wrapper">
+            <div class="content">
+              <div class="current-option">
+                <a
+                  href="#"
+                  class="current-option-text1"
+                  data-previous-text=""
+                  data-next-text=""
+                  >Why did this happend wtf</a
+                >
+                <span
+                  class="current-option-text2"
+                  data-previous-text=""
+                  data-next-text=""
+                  >this was written yesterday</span
+                >
+              </div>
+              <a href="#" class="image"></a>
+            </div>
+
+            <div class="carousel-button">
+              <button class="previous-option"></button>
+              <button class="next-option"></button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="sort-by-filter-container">
-        <div class="inner">
-          <span>sort by:</span>
-          <div class="sort-by-button-container">
-            <div class="sort-by-button newsest-sort">Newest</div>
-            <div class="sort-by-button oldest-sort">Oldest</div>
-            <div class="sort-by-button aZ-sort">A-Z</div>
-            <div class="sort-by-button zA-sort">Z-A</div>
-          </div>
-        </div>
-      </div>
-      <div class="post-section">
-        <div class="inner post-inner"></div>
-      </div>
-      <div class="inner">
-        <button class="load-more-btn">load More Posts</button>
       </div>
     </main>
     <footer>

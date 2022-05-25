@@ -117,31 +117,61 @@ const getArticleSubinfo = (infoString) => {
   //
 })();
 
-(async function newsCarousellFetch() {
-  try {
-    const newPostResponse = await fetch(baseApiUrl + "?per_page=12");
-    const newPostsJson = await newPostResponse.json();
+const carousel = document.querySelector(".carousel-wrapper");
+const currentOptionText1 = document.querySelector(".current-option-text1");
+const currentOptionText2 = document.querySelector(".current-option-text2");
+const optionPrevious = document.querySelector(".previous-option");
+const optionNext = document.querySelector(".next-option");
+const carusellImg = document.querySelector(".image");
 
-    // selceting the container for the carousel
-    const newsCarusel = document.querySelector(".news-carusel");
-    newsCarusel.innerHTML = "";
-    // looping on the fetched api array
-    for (let post of newPostsJson) {
-      newsCarusel.innerHTML += `<a href="/news/article.html?id=${
-        post.id
-      }" class="blog-card" style ="background-image: url(${ImgChecker(
-        post.x_featured_media_large,
-      )});">
-        <div class="card-title">
-          ${post.title.rendered}
-        </div>
-        <div class="card-info">
-        <div class="date-written">Written ${timeSince(post.date)} ago</div>
-      </div>
-      </div>
-    </a>`;
+(async function carusellFetch() {
+  const newPostResponse = await fetch(baseApiUrl + "?per_page=12");
+  const newPostsJson = await newPostResponse.json();
+  currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
+  carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
+  carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
+  currentOptionText1.href = carusellImg.href;
+  currentOptionText2.innerHTML = `published ${timeSince(
+    newPostsJson[i].date,
+  )} ago`;
+
+  optionNext.onclick = function () {
+    i = i + 1;
+    i = i % newPostsJson.length;
+    carousel.classList.add("anim-next");
+    setTimeout(() => {
+      carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
+      carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
+    }, 455);
+    setTimeout(() => {
+      currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
+      currentOptionText1.href = carusellImg.href;
+      currentOptionText2.innerHTML = `published ${timeSince(
+        newPostsJson[i].date,
+      )} ago`;
+      carousel.classList.remove("anim-next");
+    }, 650);
+  };
+
+  optionPrevious.onclick = function () {
+    if (i === 0) {
+      i = newPostsJson.length;
     }
-  } catch {}
+    i = i - 1;
+    carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
+    carousel.classList.add("anim-prev");
+
+    setTimeout(() => {
+      carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
+    }, 455);
+    setTimeout(() => {
+      currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
+      currentOptionText2.innerHTML = `published ${timeSince(
+        newPostsJson[i].date,
+      )} ago`;
+      carousel.classList.remove("anim-prev");
+    }, 650);
+  };
 })();
 
 (async function bigPostSection() {

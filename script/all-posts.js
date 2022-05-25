@@ -44,62 +44,22 @@ function timeSince(date) {
 const loadMoreBtn = document.querySelector(".load-more-btn");
 
 let pageCount = 1;
-let allNewsUrl = `https://api.frinans.casa/wp-json/wp/v2/posts?page=${pageCount}`;
-
-const sortByNewest = document.querySelector(".newsest-sort");
-sortByNewest.onclick = function orderBy() {
-  allNewsUrl = allNewsUrl + `&${"order=desc&orderby=date"}`;
-  newPostfetch();
-};
-
-const sortByOldest = document.querySelector(".oldest-sort");
-sortByOldest.onclick = function orderBy() {
-  allNewsUrl = allNewsUrl + `&${"order=asc&orderby=date"}`;
-  postSection.innerHTML = "";
-  newPostfetch();
-};
-
-const sortByAz = document.querySelector(".aZ-sort");
-sortByAz.onclick = function orderBy() {
-  allNewsUrl = allNewsUrl + `&${"order=asc&orderby=title"}`;
-  postSection.innerHTML = "";
-  newPostfetch();
-};
-
-const sortByZa = document.querySelector(".zA-sort");
-
-sortByZa.onclick = function orderBy() {
-  allNewsUrl = allNewsUrl + `&${"order=desc&orderby=title"}`;
-  postSection.innerHTML = "";
-  newPostfetch();
-};
+const baseApiUrl = `https://api.frinans.casa/wp-json/wp/v2/posts`;
+let allNewsUrl = `${baseApiUrl}`;
 
 const postSection = document.querySelector(".post-inner");
+
 async function newPostfetch() {
   try {
-    postSection.innerHTML = `<a href="" class="loading">
-    <div class="picture loading">
-    </div>
-    <div class="post-info">
-      <h4 class= "loading">sssdsdasdsa</h4>
-      <p class= "loading">
-      asdasdasdasdasads
-      </p>
-      <div class="post-author-date-container">
-        <div class="post-author loading">By sadasdasasd</div>
-        <div class="date loading">Published sadasdasdassa ago</div>
-      </div>
-    </div>
-  </a>`;
+    postSection.innerHTML = "";
     const response = await fetch(allNewsUrl);
     const responseJson = await response.json();
     if (responseJson.length < 10) {
       loadMoreBtn.disabled = true;
+    } else {
+      loadMoreBtn.disabled = false;
     }
-    const loading = postSection.querySelector(".loading");
-    console.log(loading);
     for (let cards of responseJson) {
-      loading.remove();
       postSection.innerHTML += `<a href="/news/article.html?id=${
         cards.id
       }" class="post ${cards.x_categories}">
@@ -125,11 +85,13 @@ async function newPostfetch() {
      </div>`;
   }
 }
-newPostfetch("");
+newPostfetch();
 
 loadMoreBtn.onclick = function () {
   pageCount = pageCount + 1;
-  allNewsUrl = `https://api.frinans.casa/wp-json/wp/v2/posts?page=${pageCount}`;
+  let page = `${allNewsUrl.includes("?") ? "&" : "?"}page=${pageCount}`;
+  allNewsUrl = `${allNewsUrl}${page}`;
+  console.log(allNewsUrl);
   loadMore();
 };
 
@@ -161,3 +123,54 @@ async function loadMore() {
     }
   } catch {}
 }
+
+const loadingpost = `<a href="" class="post bullish">
+<div class="picture loading"></div>
+<div class="post-info">
+  <h4 class="loading">
+    some randome title about some crypto stuff.
+  </h4>
+  <p class="loading">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+    perspiciatis cum corporis id suscipit quibusdam at distinctio
+    sit!
+  </p>
+  <div class="post-author-date-container">
+    <div class="post-author loading">By Mats Fjeldstad</div>
+    <div class="date loading">written 24hours ago</div>
+  </div>
+</div>
+</a>
+`;
+
+const sortByNewest = document.querySelector(".newsest-sort");
+sortByNewest.onclick = function orderBy() {
+  pageCount = 1;
+  allNewsUrl = `${baseApiUrl}?${"order=desc&orderby=date"}`;
+  console.log(allNewsUrl);
+  newPostfetch();
+};
+
+const sortByOldest = document.querySelector(".oldest-sort");
+sortByOldest.onclick = function orderBy() {
+  pageCount = 1;
+  allNewsUrl = `${baseApiUrl}?${"order=asc&orderby=date"}`;
+  postSection.innerHTML = "";
+  newPostfetch();
+};
+
+const sortByAz = document.querySelector(".aZ-sort");
+sortByAz.onclick = function orderBy() {
+  pageCount = 1;
+  allNewsUrl = `${baseApiUrl}?${"order=asc&orderby=title"}`;
+  postSection.innerHTML = "";
+  newPostfetch();
+};
+
+const sortByZa = document.querySelector(".zA-sort");
+sortByZa.onclick = function orderBy() {
+  postSection.innerHTML = loadingpost;
+  pageCount = 1;
+  allNewsUrl = `${baseApiUrl}?${"order=desc&orderby=title"}`;
+  newPostfetch();
+};
