@@ -49,9 +49,11 @@ h1 span {
 }
 
 .main-picture img {
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   width: 100%;
-  max-width: 350px;
+  height: 400px;
+  max-width: 500px;
 }
 
 .article-section .inner {
@@ -68,7 +70,7 @@ article {
   gap: 18px;
 }
 article p {
-  line-height: 2;
+  line-height: 2.5;
 }
 figure {
   margin: 80px 0;
