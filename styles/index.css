@@ -13,6 +13,7 @@ main .inner {
   flex-direction: column;
   gap: 10px;
   padding-top: 40px;
+  flex-wrap: wrap;
 }
 .product-cat {
   font-family: "Noto Serif", serif;
@@ -312,7 +313,7 @@ h3 {
 @media screen and (min-width: 769px) {
   .highlighted-news-container {
     display: grid;
-    grid-template-columns: 2.5fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 24px;
   }
   h1 {
@@ -343,10 +344,12 @@ h3 {
   }
   .aside-section {
     width: 100%;
+    ma-width: 600px;
   }
   .top-stories-section {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     gap: 16px;
     height: 100%;
   }
@@ -361,6 +364,8 @@ h3 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
     font-weight: 200;
     font-size: 14px;
   }

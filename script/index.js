@@ -126,6 +126,7 @@ const optionNext = document.querySelector(".next-option");
 const carusellImg = document.querySelector(".image");
 
 (async function carusellFetch() {
+  let i = 0;
   const newPostResponse = await fetch(baseApiUrl + "?per_page=12");
   const newPostsJson = await newPostResponse.json();
   currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
@@ -137,39 +138,48 @@ const carusellImg = document.querySelector(".image");
   )} ago`;
 
   optionNext.onclick = function () {
+    // adds 1 to the itterator
     i = i + 1;
+    // usign the remainder operator to create a carousell loop
     i = i % newPostsJson.length;
+    // adds animation class
     carousel.classList.add("anim-next");
-    setTimeout(() => {
-      carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
-      carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
-    }, 455);
+    // using setTime out ot time the animation with the img change and text change
     setTimeout(() => {
       currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
       currentOptionText1.href = carusellImg.href;
       currentOptionText2.innerHTML = `published ${timeSince(
         newPostsJson[i].date,
       )} ago`;
+      carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
+      carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
+    }, 455);
+    // removes animation class
+    setTimeout(() => {
       carousel.classList.remove("anim-next");
     }, 650);
   };
 
   optionPrevious.onclick = function () {
+    // gets the last post from the array to create a loop
     if (i === 0) {
       i = newPostsJson.length;
     }
+    // subtracs 1 from the itterator
     i = i - 1;
-    carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
+    // adds animation class
     carousel.classList.add("anim-prev");
-
+    // using setTime out ot time the animation with the img change and text change
     setTimeout(() => {
+      carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
       carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
-    }, 455);
-    setTimeout(() => {
       currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
       currentOptionText2.innerHTML = `published ${timeSince(
         newPostsJson[i].date,
       )} ago`;
+    }, 455);
+    // removes animation class
+    setTimeout(() => {
       carousel.classList.remove("anim-prev");
     }, 650);
   };
