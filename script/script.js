@@ -31,7 +31,6 @@ searchBtn.onclick = function searchClick() {
     this.parentElement.classList.add("search-open");
   } else {
     if (searchInput.value.trim().length > 0) {
-      console.log(searchInput.value);
       this.href = `/news/search.html?search=${searchInput.value
         .toLowerCase()
         .trim()}`;

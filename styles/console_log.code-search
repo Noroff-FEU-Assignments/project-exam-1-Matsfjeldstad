@@ -1,0 +1,78 @@
+# Query: console.log
+# ContextLines: 1
+
+21 results - 7 files
+
+script\all-posts.js:
+   62      for (let cards of responseJson) {
+   64        postSection.innerHTML += `<a href="/news/article.html?id=${
+
+   84    } catch (error) {
+   86      postSection.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+
+   96    allNewsUrl = `${allNewsUrl}${page}`;
+   98    loadMore();
+
+  154    allNewsUrl = `${baseApiUrl}&${"order=desc&orderby=date"}`;
+  156    newPostfetch();
+
+script\blog-post.js:
+    4  const apiURL = `https://api.frinans.casa/wp-json/wp/v2/posts/${idParam}?_embed`;
+    6  
+
+   70      const responseJson = await response.json();
+   72      // changeing the h1 of the artile based on wordpress post
+
+  102      imgs.forEach((img) => {
+  104        img.onclick = function () {
+
+  123      const loading = document.querySelectorAll(".loading");
+  125      loading.forEach((element) => {
+
+script\category-page.js:
+   94    } catch (e) {
+   95:     console.log(e);
+   96    }
+
+  187      const alt = document.querySelectorAll("img").alt;
+  189    } catch {}
+
+script\contact.js:
+  11        body = new FormData(formElement);
+  13      const response = await fetch(action, {
+
+  17      const responseJson = await response.json();
+  19      const status = responseJson.status;
+
+  38      const messageArea = event.target.querySelector("#messageArea");
+  40  
+
+  86    } catch (e) {
+  87:     console.log(e);
+  88    }
+
+script\index.js:
+  209      const postResponse = await response.json();
+  211      const htcPostSection = howToCrypto.querySelector(".post-section");
+
+  213      for (let post of postResponse) {
+  215        htcPostSection.innerHTML += `<a href="/news/article.html?id=${
+
+script\script.js:
+  33      if (searchInput.value.trim().length > 0) {
+  34:       console.log(searchInput.value);
+  35        this.href = `/news/search.html?search=${searchInput.value
+
+  89    } catch (e) {
+  90:     console.log(e);
+  91    }
+
+script\search.js:
+  134    searchApiUrl = `${baseApiUrl}?search=${searchParam}&${"order=desc&orderby=date"}`;
+  136    searchParamFetch();
+
+  144    searchApiUrl = `${baseApiUrl}?search=${searchParam}&${"order=asc&orderby=date"}`;
+  146    searchParamFetch();
+
+  152    searchApiUrl = `${baseApiUrl}?search=${searchParam}&${"order=asc&orderby=title"}`;
+  154    searchParamFetch();

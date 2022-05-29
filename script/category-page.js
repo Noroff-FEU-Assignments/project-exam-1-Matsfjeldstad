@@ -184,7 +184,5 @@ async function loadMore() {
             </div>
           </a>`;
     }
-    const alt = document.querySelectorAll("img").alt;
-    console.log(alt);
   } catch {}
 }

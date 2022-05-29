@@ -60,7 +60,6 @@ async function newPostfetch() {
       loadMoreBtn.disabled = false;
     }
     for (let cards of responseJson) {
-      console.log(cards._embedded["wp:featuredmedia"][0].alt_text);
       postSection.innerHTML += `<a href="/news/article.html?id=${
         cards.id
       }" class="post ${cards.x_categories}">
@@ -94,7 +93,6 @@ loadMoreBtn.onclick = function () {
   pageCount = pageCount + 1;
   let page = `${allNewsUrl.includes("?") ? "&" : "?"}page=${pageCount}`;
   allNewsUrl = `${allNewsUrl}${page}`;
-  console.log(allNewsUrl);
   loadMore();
 };
 
@@ -152,7 +150,6 @@ const sortByNewest = document.querySelector(".newsest-sort");
 sortByNewest.onclick = function orderBy() {
   pageCount = 1;
   allNewsUrl = `${baseApiUrl}&${"order=desc&orderby=date"}`;
-  console.log(allNewsUrl);
   newPostfetch();
 };
 

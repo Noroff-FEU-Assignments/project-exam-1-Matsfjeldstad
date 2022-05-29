@@ -9,13 +9,11 @@ async function formHandler(event) {
     const formElement = event.target,
       { action, method } = formElement,
       body = new FormData(formElement);
-    console.log(action);
     const response = await fetch(action, {
       method,
       body,
     });
     const responseJson = await response.json();
-    console.log(responseJson);
     const status = responseJson.status;
 
     formToaster.innerHTML = "";
@@ -36,7 +34,6 @@ async function formHandler(event) {
     const emailInput = event.target.querySelector("#emailInput");
     const subjectInput = event.target.querySelector("#subjectInput");
     const messageArea = event.target.querySelector("#messageArea");
-    console.log(emailInput);
 
     // validating the inputs with length limitations.
     function inputValidation(input, length) {

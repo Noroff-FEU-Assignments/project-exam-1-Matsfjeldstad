@@ -8,6 +8,7 @@ const topStoriesSection = highlightedNewsContainer.querySelector(
   ".top-stories-section",
 );
 
+// checks time since the article was posted
 function timeSince(date) {
   const totime = new Date(date);
   const seconds = Math.floor((new Date() - totime) / 1000);
@@ -207,11 +208,9 @@ const carusellImg = document.querySelector(".image");
       baseApiUrl + "?categories=13&per_page=4&_embed",
     );
     const postResponse = await response.json();
-    console.log(postResponse);
     const htcPostSection = howToCrypto.querySelector(".post-section");
     htcPostSection.innerHTML = "";
     for (let post of postResponse) {
-      console.log(post._embedded["wp:featuredmedia"][0].alt_text);
       htcPostSection.innerHTML += `<a href="/news/article.html?id=${
         post.id
       }" class="blog-card">

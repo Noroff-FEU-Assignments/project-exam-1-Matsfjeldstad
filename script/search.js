@@ -132,7 +132,6 @@ sortByNewest.onclick = function orderBy() {
   postSection.innerHTML = loadingpost;
   pageCount = 1;
   searchApiUrl = `${baseApiUrl}?search=${searchParam}&${"order=desc&orderby=date"}`;
-  console.log(this);
   searchParamFetch();
 };
 
@@ -142,7 +141,6 @@ sortByOldest.onclick = function orderBy() {
   postSection.innerHTML = loadingpost;
   pageCount = 1;
   searchApiUrl = `${baseApiUrl}?search=${searchParam}&${"order=asc&orderby=date"}`;
-  console.log(this);
   searchParamFetch();
 };
 const sortByAz = document.querySelector(".aZ-sort");
@@ -150,7 +148,6 @@ sortByAz.onclick = function orderBy() {
   postSection.innerHTML = loadingpost;
   pageCount = 1;
   searchApiUrl = `${baseApiUrl}?search=${searchParam}&${"order=asc&orderby=title"}`;
-  console.log(this);
   searchParamFetch();
 };
 const sortByZa = document.querySelector(".zA-sort");

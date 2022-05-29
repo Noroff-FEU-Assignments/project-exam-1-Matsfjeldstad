@@ -2,7 +2,6 @@ const param = new URLSearchParams(document.location.search);
 const idParam = param.get("id");
 
 const apiURL = `https://api.frinans.casa/wp-json/wp/v2/posts/${idParam}?_embed`;
-console.log(apiURL);
 
 // function to get first p from wp string
 const getArticleSubinfo = (infoString) => {
@@ -68,7 +67,7 @@ async function spesificPageFetch() {
 
     const response = await fetch(apiURL);
     const responseJson = await response.json();
-    console.log(responseJson);
+
     // changeing the h1 of the artile based on wordpress post
     const title = document.querySelector("h1");
     title.innerHTML = responseJson.title.rendered;
@@ -100,7 +99,6 @@ async function spesificPageFetch() {
 
     // loops on all imgs in the article and adds event listener
     imgs.forEach((img) => {
-      console.log(img);
       img.onclick = function () {
         modal.style.display = "block";
         modalImg.src = this.src;
@@ -121,7 +119,6 @@ async function spesificPageFetch() {
       modal.style.display = "none";
     }
     const loading = document.querySelectorAll(".loading");
-    console.log(loading);
     loading.forEach((element) => {
       element.classList.remove("loading");
     });

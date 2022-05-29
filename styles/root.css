@@ -124,9 +124,7 @@ header .logo {
 .negative {
   color: #b23d52;
 }
-.negative svg {
-  fill: #b23d52;
-}
+
 .top-ten-crypto.active * {
   color: #fff;
 }
@@ -146,7 +144,7 @@ body.active {
 }
 .bottom-section {
   position: relative;
-  height: 0vh;
+  height: 0;
   display: none;
   transition: 50ms ease-in-out;
 }
@@ -323,7 +321,6 @@ header .logo.active {
 .search-box {
   height: fit-content;
   border-radius: 60px;
-  padding: 0px;
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -352,7 +349,6 @@ header .logo.active {
   border: none;
   background: none;
   outline: none;
-  padding: 0;
   color: #2f3640;
   font-size: 16px;
   transition: 0.4s;
