@@ -60,12 +60,11 @@ const getArticleSubinfo = (infoString) => {
 
 (async function topStoryFetch() {
   //   fetching data based on category, to get just post from the "top stories category"
-  const topArticleResponse = await fetch(baseApiUrl + "?categories=12");
+  const topArticleResponse = await fetch(baseApiUrl + "?categories=12&_embed");
   const topArticleJson = await topArticleResponse.json();
-
   topArticle.innerHTML = `
 <div class="img-container">
-  <img src="${topArticleJson[0].x_featured_media_large}" alt="" />
+  <img src="${topArticleJson[0].x_featured_media_large}" alt="${topArticleJson[0]._embedded["wp:featuredmedia"][0].alt_text}"/>
 </div>
 <div class = "top-info">
   <div class="product-cat">News</div>
@@ -77,29 +76,17 @@ const getArticleSubinfo = (infoString) => {
 
 (async function asideTopStoriesFetch() {
   //   fetching data based on category, to get just post from the "top stories category"
-  const topStoriesResponse = await fetch(baseApiUrl + "?categories=11");
+  const topStoriesResponse = await fetch(baseApiUrl + "?categories=11&_embed");
   const topStoriesJson = await topStoriesResponse.json();
   topStoriesSection.innerHTML = ``;
-
-  const getImgSrc = (imgString) => {
-    const div = document.createElement("div");
-    div.innerHTML = imgString;
-    const img = div.querySelector("img");
-    if (img !== null) {
-      return img.src;
-    } else {
-      return "/img/btc-green.png";
-    }
-  };
-
   for (i = 0; i < 2; i++) {
     topStoriesSection.innerHTML += `<a href="/news/article.html?id=${
       topStoriesJson[i].id
     }" class="blog-card">
     <div class="img-container  ${topStoriesJson[i].x_categories}">
-      <img src="${ImgChecker(
-        topStoriesJson[i].x_featured_media_large,
-      )}" alt="" />
+      <img src="${ImgChecker(topStoriesJson[i].x_featured_media_large)}" alt="${
+      topStoriesJson[i]._embedded["wp:featuredmedia"][0].alt_text
+    }" />
     </div>
     <div class="info-section">
       <div class="card-title">
@@ -127,7 +114,7 @@ const carusellImg = document.querySelector(".image");
 
 (async function carusellFetch() {
   let i = 0;
-  const newPostResponse = await fetch(baseApiUrl + "?per_page=12");
+  const newPostResponse = await fetch(baseApiUrl + "?per_page=12&_embed");
   const newPostsJson = await newPostResponse.json();
   currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
   carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
@@ -187,7 +174,7 @@ const carusellImg = document.querySelector(".image");
 
 (async function bigPostSection() {
   try {
-    const response = await fetch(baseApiUrl + "?offset=5&per_page=1");
+    const response = await fetch(baseApiUrl + "?offset=5&per_page=1&_embed");
     const postResponse = await response.json();
     const biggerPost = document.querySelector(".bigger-post-banner");
     const post = postResponse[0];
@@ -206,7 +193,9 @@ const carusellImg = document.querySelector(".image");
       post.id
     }" class="bigger-post-CTA"> Read more</a>
   </div>
-  <img src="${post.x_featured_media_large}" alt="" />
+  <img src="${post.x_featured_media_large}" alt="${
+      post._embedded["wp:featuredmedia"][0].alt_text
+    }" />
   </div>`;
   } catch {}
 })();
@@ -214,17 +203,21 @@ const carusellImg = document.querySelector(".image");
 (async function howToCryptoSection() {
   try {
     const howToCrypto = document.querySelector(".how-to-crypto-section");
-    const response = await fetch(baseApiUrl + "?categories=13&per_page=4");
+    const response = await fetch(
+      baseApiUrl + "?categories=13&per_page=4&_embed",
+    );
     const postResponse = await response.json();
     console.log(postResponse);
     const htcPostSection = howToCrypto.querySelector(".post-section");
     htcPostSection.innerHTML = "";
     for (let post of postResponse) {
+      console.log(post._embedded["wp:featuredmedia"][0].alt_text);
       htcPostSection.innerHTML += `<a href="/news/article.html?id=${
         post.id
       }" class="blog-card">
       <div class="img-container bear">
-        <img src="${ImgChecker(post.x_featured_media_large)}" alt="" />
+        <img src="${ImgChecker(post.x_featured_media_large)}" alt="
+        ${post._embedded["wp:featuredmedia"][0].alt_text}" />
       </div>
       <div class="info-section">
         <div class="card-title">

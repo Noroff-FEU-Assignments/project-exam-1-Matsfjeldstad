@@ -25,8 +25,6 @@ async function formHandler(event) {
       }
       formToaster.classList.add("error");
       formToaster.innerHTML = responseJson.message;
-
-      const invalidfields = responseJson.invalid_fields;
     } else if (status === "mail_sent") {
       if (formToaster.classList.contains("error")) {
         formToaster.classList.remove("error");

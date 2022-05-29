@@ -1,7 +1,7 @@
 const param = new URLSearchParams(document.location.search);
 const idParam = param.get("id");
 
-const apiURL = `https://api.frinans.casa/wp-json/wp/v2/posts/${idParam}`;
+const apiURL = `https://api.frinans.casa/wp-json/wp/v2/posts/${idParam}?_embed`;
 console.log(apiURL);
 
 // function to get first p from wp string
@@ -81,10 +81,11 @@ async function spesificPageFetch() {
     // changee the publishing date using the timeSince() function
     const publishingDate = document.querySelector(".publishing-date");
     publishingDate.innerHTML = `Published ${timeSince(responseJson.date)} ago`;
-    // changing the img based on the first img in the article
+    // changing the img based on featured img
 
     const mainImg = document.querySelector("img");
     mainImg.src = responseJson.x_featured_media_original;
+    mainImg.alt = responseJson._embedded["wp:featuredmedia"][0].alt_text;
 
     // render html for the article section using the Word Press Api
     const article = document.querySelector("article");

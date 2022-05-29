@@ -50,7 +50,7 @@ h3 {
 
 .big-section img {
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
 }
 .aside-section {
   display: flex;
@@ -313,7 +313,7 @@ h3 {
 @media screen and (min-width: 769px) {
   .highlighted-news-container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 24px;
   }
   h1 {
@@ -344,7 +344,6 @@ h3 {
   }
   .aside-section {
     width: 100%;
-    ma-width: 600px;
   }
   .top-stories-section {
     display: flex;

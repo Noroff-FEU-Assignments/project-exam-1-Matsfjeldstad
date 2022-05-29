@@ -43,8 +43,8 @@ const getArticleSubinfo = (infoString) => {
 let pageCount = 1;
 const loadMoreBtn = document.querySelector(".load-more-btn");
 
-const baseApiUrl = `https://api.frinans.casa/wp-json/wp/v2/posts`;
-let postUrl = `${baseApiUrl}?categories=13`;
+const baseApiUrl = `https://api.frinans.casa/wp-json/wp/v2/posts?_embed`;
+let postUrl = `${baseApiUrl}&categories=13`;
 
 const postSection = document.querySelector(".post-inner");
 async function catgoryFetch() {
@@ -64,7 +64,9 @@ async function catgoryFetch() {
         posts.id
       }" class="post">
       <div class="picture">
-        <img src="${posts.x_featured_media_large}" alt="eth-coin" />
+        <img src="${posts.x_featured_media_large}" alt="${
+        posts._embedded["wp:featuredmedia"][0].alt_text
+      }"/>
       </div>
       <div class="post-info">
         <h4>${posts.title.rendered}</h4>
@@ -112,7 +114,7 @@ sortByNewest.onclick = function orderBy() {
 const sortByOldest = document.querySelector(".oldest-sort");
 sortByOldest.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=13&${"order=asc&orderby=date"}`;
+  postUrl = `${baseApiUrl}&categories=13&${"order=asc&orderby=date"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -120,7 +122,7 @@ sortByOldest.onclick = function orderBy() {
 const sortByAz = document.querySelector(".aZ-sort");
 sortByAz.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=13&${"order=asc&orderby=title"}`;
+  postUrl = `${baseApiUrl}&categories=13&${"order=asc&orderby=title"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -129,7 +131,7 @@ const sortByZa = document.querySelector(".zA-sort");
 
 sortByZa.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=13&${"order=desc&orderby=title"}`;
+  postUrl = `${baseApiUrl}&categories=13&${"order=desc&orderby=title"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -152,9 +154,11 @@ async function loadMore() {
       postSection.innerHTML += `<a href="/news/article.html?id=${
         cards.id
       }" class="post ${cards.x_categories}">
-            <div class="picture">
-              <img src="${cards.x_featured_media_large}"/>
-            </div>
+      <div class="picture">
+      <img src="${cards.x_featured_media_large}" alt="${
+        cards._embedded["wp:featuredmedia"][0].alt_text
+      }"/>
+    </div>
             <div class="post-info">
               <h4>${cards.title.rendered}</h4>
               <p>

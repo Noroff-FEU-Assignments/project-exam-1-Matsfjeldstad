@@ -46,8 +46,8 @@ const getArticleSubinfo = (infoString) => {
 let pageCount = 1;
 const loadMoreBtn = document.querySelector(".load-more-btn");
 
-const baseApiUrl = `https://api.frinans.casa/wp-json/wp/v2/posts`;
-let postUrl = `${baseApiUrl}?categories=${idParam}`;
+const baseApiUrl = `https://api.frinans.casa/wp-json/wp/v2/posts?_embed`;
+let postUrl = `${baseApiUrl}&categories=${idParam}`;
 
 const categoryUrl = `https://api.frinans.casa/wp-json/wp/v2/categories/${idParam}`;
 const postSection = document.querySelector(".post-inner");
@@ -75,7 +75,9 @@ async function catgoryFetch() {
         posts.id
       }" class="post">
       <div class="picture">
-        <img src="${posts.x_featured_media_large}" alt="eth-coin" />
+        <img src="${posts.x_featured_media_large}" alt="${
+        posts._embedded["wp:featuredmedia"][0].alt_text
+      }"/>
       </div>
       <div class="post-info">
         <h4>${posts.title.rendered}</h4>
@@ -89,7 +91,9 @@ async function catgoryFetch() {
       </div>
     </a>`;
     }
-  } catch {}
+  } catch (e) {
+    console.log(e);
+  }
 }
 catgoryFetch();
 
@@ -115,7 +119,7 @@ const loadingpost = `<a href="" class="post bullish">
 const sortByNewest = document.querySelector(".newsest-sort");
 sortByNewest.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=${idParam}&${"order=desc&orderby=date"}`;
+  postUrl = `${baseApiUrl}&categories=${idParam}&${"order=desc&orderby=date"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -123,7 +127,7 @@ sortByNewest.onclick = function orderBy() {
 const sortByOldest = document.querySelector(".oldest-sort");
 sortByOldest.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=${idParam}&${"order=asc&orderby=date"}`;
+  postUrl = `${baseApiUrl}&categories=${idParam}&${"order=asc&orderby=date"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -131,7 +135,7 @@ sortByOldest.onclick = function orderBy() {
 const sortByAz = document.querySelector(".aZ-sort");
 sortByAz.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=${idParam}&${"order=asc&orderby=title"}`;
+  postUrl = `${baseApiUrl}&categories=${idParam}&${"order=asc&orderby=title"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -140,7 +144,7 @@ const sortByZa = document.querySelector(".zA-sort");
 
 sortByZa.onclick = function orderBy() {
   pageCount = 1;
-  postUrl = `${baseApiUrl}?categories=${idParam}&${"order=desc&orderby=title"}`;
+  postUrl = `${baseApiUrl}&categories=${idParam}&${"order=desc&orderby=title"}`;
   postSection.innerHTML = loadingpost;
   catgoryFetch();
 };
@@ -164,7 +168,9 @@ async function loadMore() {
         cards.id
       }" class="post ${cards.x_categories}">
             <div class="picture">
-              <img src="${cards.x_featured_media_large}"/>
+              <img alt='${cards._embedded["wp:featuredmedia"][0].alt_text}'
+              src="${cards.x_featured_media_large}" 
+              />
             </div>
             <div class="post-info">
               <h4>${cards.title.rendered}</h4>
@@ -178,5 +184,7 @@ async function loadMore() {
             </div>
           </a>`;
     }
+    const alt = document.querySelectorAll("img").alt;
+    console.log(alt);
   } catch {}
 }
