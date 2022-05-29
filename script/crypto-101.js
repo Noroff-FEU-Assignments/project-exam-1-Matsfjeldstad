@@ -80,7 +80,11 @@ async function catgoryFetch() {
       </div>
     </a>`;
     }
-  } catch {}
+  } catch (error) {
+    postSection.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
+  }
 }
 catgoryFetch();
 
@@ -171,5 +175,9 @@ async function loadMore() {
             </div>
           </a>`;
     }
-  } catch {}
+  } catch (error) {
+    postSection.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
+  }
 }

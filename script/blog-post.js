@@ -122,7 +122,13 @@ async function spesificPageFetch() {
     loading.forEach((element) => {
       element.classList.remove("loading");
     });
-  } catch {}
+  } catch (error) {
+    document.querySelector(
+      "main",
+    ).innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
+  }
 }
 spesificPageFetch();
 

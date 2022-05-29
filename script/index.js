@@ -60,49 +60,64 @@ const getArticleSubinfo = (infoString) => {
 };
 
 (async function topStoryFetch() {
-  //   fetching data based on category, to get just post from the "top stories category"
-  const topArticleResponse = await fetch(baseApiUrl + "?categories=12&_embed");
-  const topArticleJson = await topArticleResponse.json();
-  topArticle.innerHTML = `
-<div class="img-container">
-  <img src="${topArticleJson[0].x_featured_media_large}" alt="${topArticleJson[0]._embedded["wp:featuredmedia"][0].alt_text}"/>
-</div>
-<div class = "top-info">
-  <div class="product-cat">News</div>
-  <h1>${topArticleJson[0].title.rendered}</h1>
-</div>`;
-  topArticle.href = `/news/article.html?id=${topArticleJson[0].id}`;
-  //
+  try {
+    //   fetching data based on category, to get just post from the "top stories category"
+    const topArticleResponse = await fetch(
+      baseApiUrl + "?categories=12&_embed",
+    );
+    const topArticleJson = await topArticleResponse.json();
+    topArticle.innerHTML = `
+  <div class="img-container">
+    <img src="${topArticleJson[0].x_featured_media_large}" alt="${topArticleJson[0]._embedded["wp:featuredmedia"][0].alt_text}"/>
+  </div>
+  <div class = "top-info">
+    <div class="product-cat">News</div>
+    <h1>${topArticleJson[0].title.rendered}</h1>
+  </div>`;
+    topArticle.href = `/news/article.html?id=${topArticleJson[0].id}`;
+    //
+  } catch (error) {
+    topArticle.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
+  }
 })();
 
 (async function asideTopStoriesFetch() {
-  //   fetching data based on category, to get just post from the "top stories category"
-  const topStoriesResponse = await fetch(baseApiUrl + "?categories=11&_embed");
-  const topStoriesJson = await topStoriesResponse.json();
-  topStoriesSection.innerHTML = ``;
-  for (i = 0; i < 2; i++) {
-    topStoriesSection.innerHTML += `<a href="/news/article.html?id=${
-      topStoriesJson[i].id
-    }" class="blog-card">
-    <div class="img-container  ${topStoriesJson[i].x_categories}">
-      <img src="${ImgChecker(topStoriesJson[i].x_featured_media_large)}" alt="${
-      topStoriesJson[i]._embedded["wp:featuredmedia"][0].alt_text
-    }" />
+  try {
+    //   fetching data based on category, to get just post from the "top stories category"
+    const topStoriesResponse = await fetch(
+      baseApiUrl + "?categories=11&_embed",
+    );
+    const topStoriesJson = await topStoriesResponse.json();
+    topStoriesSection.innerHTML = ``;
+    for (i = 0; i < 2; i++) {
+      topStoriesSection.innerHTML += `<a href="/news/article.html?id=${
+        topStoriesJson[i].id
+      }" class="blog-card">
+  <div class="img-container  ${topStoriesJson[i].x_categories}">
+    <img src="${ImgChecker(topStoriesJson[i].x_featured_media_large)}" alt="${
+        topStoriesJson[i]._embedded["wp:featuredmedia"][0].alt_text
+      }" />
+  </div>
+  <div class="info-section">
+    <div class="card-title">
+      ${topStoriesJson[i].title.rendered}
     </div>
-    <div class="info-section">
-      <div class="card-title">
-        ${topStoriesJson[i].title.rendered}
-      </div>
-      <div class="card-info">
-        <div class="author">By ${topStoriesJson[i].x_author}</div>
-        <div class="date-written">Written ${timeSince(
-          topStoriesJson[i].date,
-        )} ago</div>
-      </div>
+    <div class="card-info">
+      <div class="author">By ${topStoriesJson[i].x_author}</div>
+      <div class="date-written">Written ${timeSince(
+        topStoriesJson[i].date,
+      )} ago</div>
     </div>
-  </a>`;
+  </div>
+</a>`;
+    }
+  } catch (error) {
+    topStoriesSection.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
   }
-
   //
 })();
 
@@ -114,63 +129,71 @@ const optionNext = document.querySelector(".next-option");
 const carusellImg = document.querySelector(".image");
 
 (async function carusellFetch() {
-  let i = 0;
-  const newPostResponse = await fetch(baseApiUrl + "?per_page=12&_embed");
-  const newPostsJson = await newPostResponse.json();
-  currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
-  carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
-  carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
-  currentOptionText1.href = carusellImg.href;
-  currentOptionText2.innerHTML = `published ${timeSince(
-    newPostsJson[i].date,
-  )} ago`;
+  try {
+    let i = 0;
+    const newPostResponse = await fetch(baseApiUrl + "?per_page=12&_embed");
+    const newPostsJson = await newPostResponse.json();
+    currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
+    carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
+    carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
+    currentOptionText1.href = carusellImg.href;
+    currentOptionText2.innerHTML = `published ${timeSince(
+      newPostsJson[i].date,
+    )} ago`;
 
-  optionNext.onclick = function () {
-    // adds 1 to the itterator
-    i = i + 1;
-    // usign the remainder operator to create a carousell loop
-    i = i % newPostsJson.length;
-    // adds animation class
-    carousel.classList.add("anim-next");
-    // using setTime out ot time the animation with the img change and text change
-    setTimeout(() => {
-      currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
-      currentOptionText1.href = carusellImg.href;
-      currentOptionText2.innerHTML = `published ${timeSince(
-        newPostsJson[i].date,
-      )} ago`;
-      carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
-      carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
-    }, 455);
-    // removes animation class
-    setTimeout(() => {
-      carousel.classList.remove("anim-next");
-    }, 650);
-  };
+    optionNext.onclick = function () {
+      // adds 1 to the itterator
+      i = i + 1;
+      // usign the remainder operator to create a carousell loop
+      i = i % newPostsJson.length;
+      // adds animation class
+      carousel.classList.add("anim-next");
+      // using setTime out ot time the animation with the img change and text change
+      setTimeout(() => {
+        currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
+        currentOptionText1.href = carusellImg.href;
+        currentOptionText2.innerHTML = `published ${timeSince(
+          newPostsJson[i].date,
+        )} ago`;
+        carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
+        carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
+      }, 455);
+      // removes animation class
+      setTimeout(() => {
+        carousel.classList.remove("anim-next");
+      }, 650);
+    };
 
-  optionPrevious.onclick = function () {
-    // gets the last post from the array to create a loop
-    if (i === 0) {
-      i = newPostsJson.length;
-    }
-    // subtracs 1 from the itterator
-    i = i - 1;
-    // adds animation class
-    carousel.classList.add("anim-prev");
-    // using setTime out ot time the animation with the img change and text change
-    setTimeout(() => {
-      carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
-      carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
-      currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
-      currentOptionText2.innerHTML = `published ${timeSince(
-        newPostsJson[i].date,
-      )} ago`;
-    }, 455);
-    // removes animation class
-    setTimeout(() => {
-      carousel.classList.remove("anim-prev");
-    }, 650);
-  };
+    optionPrevious.onclick = function () {
+      // gets the last post from the array to create a loop
+      if (i === 0) {
+        i = newPostsJson.length;
+      }
+      // subtracs 1 from the itterator
+      i = i - 1;
+      // adds animation class
+      carousel.classList.add("anim-prev");
+      // using setTime out ot time the animation with the img change and text change
+      setTimeout(() => {
+        carusellImg.href = `/news/article.html?id=${newPostsJson[i].id}`;
+        carusellImg.style.backgroundImage = `url('${newPostsJson[i].x_featured_media_original}')`;
+        currentOptionText1.innerHTML = newPostsJson[i].title.rendered;
+        currentOptionText2.innerHTML = `published ${timeSince(
+          newPostsJson[i].date,
+        )} ago`;
+      }, 455);
+      // removes animation class
+      setTimeout(() => {
+        carousel.classList.remove("anim-prev");
+      }, 650);
+    };
+  } catch (error) {
+    document.querySelector(
+      ".carousel-wrapper",
+    ).innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
+  }
 })();
 
 (async function bigPostSection() {
@@ -198,7 +221,11 @@ const carusellImg = document.querySelector(".image");
       post._embedded["wp:featuredmedia"][0].alt_text
     }" />
   </div>`;
-  } catch {}
+  } catch (error) {
+    biggerPost.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
+  }
 })();
 
 (async function howToCryptoSection() {
@@ -229,5 +256,9 @@ const carusellImg = document.querySelector(".image");
       </div>
     </a>`;
     }
-  } catch {}
+  } catch (error) {
+    htcPostSection.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
+  }
 })();

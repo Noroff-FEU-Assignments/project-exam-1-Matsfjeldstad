@@ -85,8 +85,10 @@ async function fetchCryptoApi() {
       )}%</div>
         </div>`;
     }
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    topTenCryptoSection.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+      ${error}
+       </div>`;
   }
 }
 fetchCryptoApi();

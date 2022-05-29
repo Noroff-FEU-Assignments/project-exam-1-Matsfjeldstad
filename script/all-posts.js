@@ -124,7 +124,11 @@ async function loadMore() {
             </div>
           </a>`;
     }
-  } catch {}
+  } catch {
+    postSection.innerHTML += `<div class="errorHandler"> oh no something wrong happend..
+    ${error}
+     </div>`;
+  }
 }
 
 const loadingpost = `<a href="" class="post bullish">

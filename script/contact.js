@@ -81,7 +81,9 @@ async function formHandler(event) {
     inputValidation(messageArea, 25);
     emailValidation(emailInput);
   } catch (e) {
-    console.log(e);
+    formToaster.innerHTML = `<div class="errorHandler"> oh no something wrong happend..
+    ${e}
+     </div>`;
   }
 }
 
