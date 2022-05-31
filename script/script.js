@@ -39,12 +39,15 @@ searchBtn.onclick = function searchClick() {
 };
 
 // top 10 crypto section, using nomics api to collect the data
-const proxyUrl = "https://noroffcors.herokuapp.com/";
+const proxyUrl = "https://thingproxy.freeboard.io/fetch/";
 const cryptoAPIUrl =
   "https://api.nomics.com/v1/currencies/ticker?key=633b5251cda11c9b9112ec739226f763f09a13ab&per-page=10";
 async function fetchCryptoApi() {
   try {
-    const response = await fetch(proxyUrl + cryptoAPIUrl);
+    const response = await fetch(cryptoAPIUrl, {
+      method: "GET",
+      mode: "cors",
+    });
     const responseJson = await response.json();
     let changeStyle = "";
     topTenCryptoSection.innerHTML = "";
