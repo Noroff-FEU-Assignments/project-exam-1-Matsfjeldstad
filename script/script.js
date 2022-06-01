@@ -46,7 +46,7 @@ async function fetchCryptoApi() {
   try {
     const response = await fetch(cryptoAPIUrl, {
       headers: {
-        "Access-Control-Allow-Origin": true,
+        "Access-Control-Allow-Origin": "*",
       },
     });
     const responseJson = await response.json();
