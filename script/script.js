@@ -46,7 +46,7 @@ async function fetchCryptoApi() {
   try {
     const response = await fetch(cryptoAPIUrl, {
       headers: {
-        "Access-Control-Allow-Origin": "https://frinans.netlify.app/",
+        "Access-Control-Allow-Origin": true,
       },
     });
     const responseJson = await response.json();
